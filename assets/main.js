@@ -47,6 +47,20 @@ let weather = {
         dateEl.innerHTML = dates
   
         }
+
+        var tempEls = document.getElementsByClassName("temp")
+
+        console.log(tempEls)
+  
+        for(i = 0; i<tempEls.length; i++){
+  
+          var temperature = (`${data.list[i].main.temp}°F`)
+  
+          var tempEl = tempEls[i]
+  
+         tempEl.innerText = temperature
+  
+        }
   
 
       
