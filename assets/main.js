@@ -63,7 +63,7 @@ let weather = {
 
         var iconEls = document.getElementsByClassName("icon")
       
-      console.log(iconEls)
+        console.log(iconEls)
 
       for(i = 0; i < iconEls.length ; i++){ 
 
@@ -74,11 +74,21 @@ let weather = {
         var iconEl = iconEls[i]
 
         iconEl.src = icons
-      };
+      }
 
-  
+      var descEls = document.getElementsByClassName("description")
 
-      
+      console.log(descEls)
+
+      for(i = 0; i<descEls.length ; i++){
+
+        var desc = (data.list[i].weather[0].description)
+        
+        var descEl = descEls[i]
+
+        descEl.innerHTML = desc
+      }
+
       });
    },
 
