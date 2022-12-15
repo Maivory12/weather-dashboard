@@ -1,4 +1,4 @@
-var date = document.querySelector(".date")
+var date = document.querySelector(".dates")
     setInterval(function(){
       date.textContent = moment().format("MMMM Do YYYY")})
 
@@ -18,14 +18,14 @@ let weather = {
     const { speed } = data.wind;
     const {lon, lat} = data.coord;
     console.log(name, lon, lat, date, icon, description, temp, humidity, speed);
-    document.querySelector(".city").innerText = name;
-    document.querySelector(".temp").innerHTML = temp + "°F";
-    document.querySelector(".icon").src =
+    document.querySelector(".citys").innerText = name;
+    document.querySelector(".temps").innerHTML = temp + "°F";
+    document.querySelector(".icons").src =
       "https://openweathermap.org/img/wn/" + icon + ".png";
-    document.querySelector(".description").innerHTML = description;
-    document.querySelector(".humidity").innerHTML =
+    document.querySelector(".descriptions").innerHTML = description;
+    document.querySelector(".humiditys").innerHTML =
       "Humidity: " + humidity + "%";
-    document.querySelector(".speed").innerHTML =
+    document.querySelector(".speeds").innerHTML =
       "Wind Speed: " + speed + "mph ";
       
   },
@@ -34,7 +34,23 @@ let weather = {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" +
     city + "&units=imperial&appid=" + this.apiKey)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) =>{ console.log(data)
+
+        var dateEls = document.getElementsByClassName("date")
+      console.log(dateEls)
+
+      for(i = 0; i < dateEls.length; (i++)){
+
+        var dates = moment.unix(`${data.list[i].dt}`).calendar()
+        var dateEl = dateEls[i]
+  
+        dateEl.innerHTML = dates
+  
+        }
+  
+
+      
+      });
    },
 
   search: function (){
@@ -52,13 +68,7 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
   }
 });
 
-let FiveDay = {
-  apiKey: "6af174eb1acf790c330054f1967a6d0f",
-fetchFutureWeather: function (lon,lat) {
-  fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat +"&lon=" + lon + "&appid=" + this.apiKey)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
- },
-}
+
 
   weather.fetchWeather("Atlanta")
+  weather.fetchFutureWeather("Atlanta")
