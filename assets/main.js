@@ -37,7 +37,7 @@ let weather = {
       .then((data) =>{ console.log(data)
 
         var dateEls = document.getElementsByClassName("date")
-      console.log(dateEls)
+        console.log(dateEls)
 
       for(i = 0; i < dateEls.length; (i++)){
 
@@ -49,10 +49,9 @@ let weather = {
         }
 
         var tempEls = document.getElementsByClassName("temp")
-
         console.log(tempEls)
   
-        for(i = 0; i<tempEls.length; i++){
+      for(i = 0; i<tempEls.length; i++){
   
           var temperature = (`${data.list[i].main.temp}°F`)
   
@@ -61,6 +60,22 @@ let weather = {
          tempEl.innerText = temperature
   
         }
+
+        var iconEls = document.getElementsByClassName("icon")
+      
+      console.log(iconEls)
+
+      for(i = 0; i < iconEls.length ; i++){ 
+
+        var icon = (data.list[i].weather[0].icon)
+
+        var icons = ("https://openweathermap.org/img/wn/" + icon + ".png")
+
+        var iconEl = iconEls[i]
+
+        iconEl.src = icons
+      };
+
   
 
       
@@ -68,7 +83,8 @@ let weather = {
    },
 
   search: function (){
-    this.fetchWeather(document.querySelector(".search-bar").value);
+    this.fetchWeather(document.querySelector(".search-bar").value)
+    this.fetchFutureWeather(document.querySelector(".search-bar").value)
   }
 };
 
