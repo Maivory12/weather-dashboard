@@ -16,7 +16,8 @@ let weather = {
     const { icon, description } = data.weather[0];
     const { temp, humidity } = data.main;
     const { speed } = data.wind;
-    console.log(name, date, icon, description, temp, humidity, speed);
+    const {lon, lat} = data.coord;
+    console.log(name, lon, lat, date, icon, description, temp, humidity, speed);
     document.querySelector(".city").innerText = name;
     document.querySelector(".temp").innerHTML = temp + "°F";
     document.querySelector(".icon").src =
@@ -26,7 +27,15 @@ let weather = {
       "Humidity: " + humidity + "%";
     document.querySelector(".speed").innerHTML =
       "Wind Speed: " + speed + "mph ";
+      
   },
+
+  fetchFutureWeather: function (city) {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" +
+    city + "&units=imperial&appid=" + this.apiKey)
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+   },
 
   search: function (){
     this.fetchWeather(document.querySelector(".search-bar").value);
@@ -42,5 +51,14 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
     weather.search();
   }
 });
+
+let FiveDay = {
+  apiKey: "6af174eb1acf790c330054f1967a6d0f",
+fetchFutureWeather: function (lon,lat) {
+  fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat +"&lon=" + lon + "&appid=" + this.apiKey)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+ },
+}
 
   weather.fetchWeather("Atlanta")
