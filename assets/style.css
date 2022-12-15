@@ -3,7 +3,11 @@ body  {
     display: flex;
     justify-content: center; 
     align-items: center;  
-    height: 200vh;
-    
+    height: 100vh;
+
 }
 
+.icon {
+
+  width: 70px;
+}

@@ -6,8 +6,7 @@ let weather = {
   apiKey: "6af174eb1acf790c330054f1967a6d0f",
   fetchWeather: function (city) {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" +
-        city + "&units=imperial&appid=" + this.apiKey, {SameSite:"None"}
-    )
+        city + "&units=imperial&appid=" + this.apiKey)
       .then((response) => response.json())
       .then((data) => this.displayWeather(data));
     },
@@ -27,5 +26,21 @@ let weather = {
       "Humidity: " + humidity + "%";
     document.querySelector(".speed").innerHTML =
       "Wind Speed: " + speed + "mph ";
+  },
+
+  search: function (){
+    this.fetchWeather(document.querySelector(".search-bar").value);
   }
-}
+};
+
+document.querySelector(".card-header button").addEventListener("click", function(){
+  weather.search();
+});
+
+document.querySelector(".search-bar").addEventListener("keyup", function (event){
+  if (event.key == "Enter"){
+    weather.search();
+  }
+});
+
+  weather.fetchWeather("Atlanta")
