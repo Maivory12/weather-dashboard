@@ -89,6 +89,34 @@ let weather = {
         descEl.innerHTML = desc
       }
 
+      var humidEls = document.getElementsByClassName("humidity")
+      
+      console.log(humidEls)
+
+      for(i=0; i<humidEls.length ;i++){
+
+        var humid = `Humidity: ${data.list[i].main.humidity}%`
+
+        var humidEl = humidEls[i]
+
+        humidEl.innerHTML = humid
+      }
+
+      var speedEls = document.getElementsByClassName("speed")
+
+      console.log(speedEls)
+
+      for(i=0; i<speedEls.length ;i++){
+        
+        var speed = `Wind Speed: ${data.list[i].wind.speed} MPH`;
+        
+        var speedEl = speedEls[i]
+        
+        speedEl.innerHTML = speed
+      } 
+  
+
+
       });
    },
 
