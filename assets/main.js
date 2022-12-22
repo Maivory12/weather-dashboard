@@ -27,6 +27,15 @@ let weather = {
       "Humidity: " + humidity + "%";
     document.querySelector(".speeds").innerHTML =
       "Wind Speed: " + speed + "mph ";
+
+      if (allCities.includes(name) == false) {
+        allCities.push(name);
+        localStorage.setItem("cities", JSON.stringify(allCities));
+        historyEl = document.createElement("button");
+        historyEl.setAttribute("class", "btn btn-secondary");
+        historyEl.innerText = name;
+        document.querySelector(".history").appendChild(historyEl);
+      }
       
   },
 
@@ -115,7 +124,7 @@ let weather = {
         speedEl.innerHTML = speed
       } 
   
-
+ 
 
       });
    },
@@ -136,6 +145,21 @@ document.querySelector(".search-bar").addEventListener("keyup", function (event)
   }
 });
 
+
+
+// recalls and loads cities from local storage
+var allCities = JSON.parse(localStorage.getItem("cities"));
+if (!allCities) {
+  allCities = [];
+} else {
+  for (i = 0; i < allCities.length; i++) {
+    var historyEl = document.createElement("button");
+    historyEl.setAttribute("class", "btn btn-secondary");
+    historyEl.innerText = allCities[i];
+    document.querySelector(".history").appendChild(historyEl);
+  }
+}
+  
 
 
   weather.fetchWeather("Atlanta")
