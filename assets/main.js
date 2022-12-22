@@ -135,16 +135,24 @@ let weather = {
   }
 };
 
-document.querySelector(".card-header button").addEventListener("click", function(){
+$(".card-header button").on("click", () =>{
   weather.search();
 });
 
-document.querySelector(".search-bar").addEventListener("keyup", function (event){
+$(".search-bar").on("keyup", (event) =>{
   if (event.key == "Enter"){
     weather.search();
   }
 });
 
+// Event listener for click on historical search buttons
+$(".history").on("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    weather.fetchWeather(event.target.innerText);
+    weather.fetchFutureWeather(event.target.innerText);
+
+  }
+});
 
 
 // recalls and loads cities from local storage
