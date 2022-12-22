@@ -1,7 +1,10 @@
+//Displays date on current day card
 var date = document.querySelector(".dates")
     setInterval(function(){
       date.textContent = moment().format("MMMM Do YYYY")})
 
+
+//Object containing functions for current day and 5 day api fetch      
 let weather = {
   apiKey: "6af174eb1acf790c330054f1967a6d0f",
   fetchWeather: function (city) {
@@ -10,7 +13,7 @@ let weather = {
       .then((response) => response.json())
       .then((data) => this.displayWeather(data));
     },
-
+//Function to fetch weather for current day card. Displays the city, date, temperature, icon, description, humidity, and wind speed for current day.
   displayWeather: function (data) {
     const { name } = data;
     const { icon, description } = data.weather[0];
@@ -18,6 +21,7 @@ let weather = {
     const { speed } = data.wind;
     const {lon, lat} = data.coord;
     console.log(name, lon, lat, date, icon, description, temp, humidity, speed);
+    
     document.querySelector(".citys").innerText = name;
     document.querySelector(".temps").innerHTML = temp + "°F";
     document.querySelector(".icons").src =
@@ -28,6 +32,7 @@ let weather = {
     document.querySelector(".speeds").innerHTML =
       "Wind Speed: " + speed + "mph ";
 
+      // Adds only new cities to history button list
       if (allCities.includes(name) == false) {
         allCities.push(name);
         localStorage.setItem("cities", JSON.stringify(allCities));
@@ -39,6 +44,7 @@ let weather = {
       
   },
 
+  //Function to fetch weather for 5 day cards. Displays the date, temperature, icon, description, humidity, and wind speed for each day iterated by for loop.
   fetchFutureWeather: function (city) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" +
     city + "&units=imperial&appid=" + this.apiKey)
@@ -129,16 +135,19 @@ let weather = {
       });
    },
 
+//Function to fetch weather for value in search bar
   search: function (){
     this.fetchWeather(document.querySelector(".search-bar").value)
     this.fetchFutureWeather(document.querySelector(".search-bar").value)
   }
 };
 
+//Event listner for click of the search button
 $(".card-header button").on("click", () =>{
   weather.search();
 });
 
+// Event listner for enter key
 $(".search-bar").on("keyup", (event) =>{
   if (event.key == "Enter"){
     weather.search();
@@ -166,9 +175,20 @@ if (!allCities) {
     historyEl.innerText = allCities[i];
     document.querySelector(".history").appendChild(historyEl);
   }
+};
+
+
+// local storage clear
+var clearLocalStorage = function () {
+  localStorage.removeItem("allCities");
+  $(".history").html('');
+  searchedHistory = [];
+  localStorage.clear()
+  location.reload();
 }
+$("#clear").on('click', clearLocalStorage);
   
 
-
+// Automatically displays Atlanta's weather to the page on load
   weather.fetchWeather("Atlanta")
   weather.fetchFutureWeather("Atlanta")
