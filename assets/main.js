@@ -41,7 +41,7 @@ let weather = {
 
       for(i = 0; i < dateEls.length; (i++)){
 
-        var dates = moment.unix(`${data.list[i].dt}`).calendar()
+        var dates = moment.unix(`${data.list[i*8].dt}`).format('LL')
         var dateEl = dateEls[i]
   
         dateEl.innerHTML = dates
@@ -53,7 +53,7 @@ let weather = {
   
       for(i = 0; i<tempEls.length; i++){
   
-          var temperature = (`${data.list[i].main.temp}°F`)
+          var temperature = (`${data.list[i*8].main.temp}°F`)
   
           var tempEl = tempEls[i]
   
@@ -67,7 +67,7 @@ let weather = {
 
       for(i = 0; i < iconEls.length ; i++){ 
 
-        var icon = (data.list[i].weather[0].icon)
+        var icon = (data.list[i*8].weather[0].icon)
 
         var icons = ("https://openweathermap.org/img/wn/" + icon + ".png")
 
@@ -82,7 +82,7 @@ let weather = {
 
       for(i = 0; i<descEls.length ; i++){
 
-        var desc = (data.list[i].weather[0].description)
+        var desc = (data.list[i*8].weather[0].description)
         
         var descEl = descEls[i]
 
@@ -95,7 +95,7 @@ let weather = {
 
       for(i=0; i<humidEls.length ;i++){
 
-        var humid = `Humidity: ${data.list[i].main.humidity}%`
+        var humid = `Humidity: ${data.list[i*8].main.humidity}%`
 
         var humidEl = humidEls[i]
 
@@ -108,7 +108,7 @@ let weather = {
 
       for(i=0; i<speedEls.length ;i++){
         
-        var speed = `Wind Speed: ${data.list[i].wind.speed} MPH`;
+        var speed = `Wind Speed: ${data.list[i*8].wind.speed} MPH`;
         
         var speedEl = speedEls[i]
         
