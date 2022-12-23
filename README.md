@@ -32,7 +32,7 @@ N/a
 For questions please contact Maivory12@icloud.com
 
 ##Mock-Up
-![Mock Up](./assets/images/maivory12.github.io_weather-dashboard_.png)
+![Mock Up](./assets/images/Web%20capture_22-12-2022_2017_127.0.0.1.jpeg) 
 
 ##Deployment
 https://maivory12.github.io/weather-dashboard/
