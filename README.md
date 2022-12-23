@@ -11,7 +11,7 @@ Weather Dashboard
 - [Questions](#questions)
 
 ##Description 
-An application that allows you to search for the weather conditions including temperature, and icon of the weather description, a description in words of the weather conditions,  the humidity, and wind speed for current day plus a five day forcast containing the same elements.
+An application that allows you to search for the weather conditions in city of choice upon search including the temperature, an icon of the weather description, a description in words of the weather conditions,  the humidity, and wind speed for current day plus a five day forcast containing the same elements.
 
 ##License
 N/a
